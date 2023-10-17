@@ -1,0 +1,121 @@
+<div class="row mt-3">
+  <div class="col-6">
+    <div class="card m-auto">
+      
+        <div class="card-header">
+          Registration
+        </div>
+
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit(userForm)" #userForm="ngForm">
+
+            <div class="form-group col-12">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control" name="user.firstName"
+                     required #userFormFirstName="ngModel" minlength="5" [(ngModel)]="user.firstName" />
+
+              <span class="error-block" *ngIf="!userFormFirstName.valid && userFormFirstName.touched">
+
+                <span *ngIf="userFormFirstName.hasError('required')">
+                  First Name is required!
+                </span>
+
+                <span *ngIf="userFormFirstName.hasError('minlength')">
+                  First Name should be at least 5 charachters!
+                </span>
+
+              </span>
+
+            </div>
+
+            <div class="form-group col-12">
+              <label for="lastName">Last Name</label>
+              <input type="text" class="form-control" name="user.lastName"
+                     required #userFormLastName="ngModel" minlength="5" [(ngModel)]="user.lastName" />
+
+              <span class="error-block" *ngIf="!userFormLastName.valid && userFormLastName.touched">
+
+                <span *ngIf="userFormLastName.hasError('required')">
+                  Last Name is required!
+                </span>
+
+                <span *ngIf="userFormLastName.hasError('minlength')">
+                  Last Name should be at least 5 charachters!
+                </span>
+
+              </span>
+
+            </div>
+
+
+            <div class="form-group col-12">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" name="user.email"
+                     required #userFormEmail="ngModel" email [(ngModel)]="user.email" />
+
+              <span class="error-block" *ngIf="!userFormEmail.valid && userFormEmail.touched">
+
+                <span *ngIf="userFormEmail.hasError('required')">
+                  Email is required!
+                </span>
+
+                <span *ngIf="userFormEmail.hasError('email')">
+                  Email is invaild!
+                </span>
+
+              </span>
+
+            </div>
+
+            <div class="form-group col-12">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" name="user.password"
+                     required #userFormPassword="ngModel" minlength="5" [(ngModel)]="user.password" />
+
+              <span class="error-block" *ngIf="!userFormPassword.valid && userFormPassword.touched">
+
+                <span *ngIf="userFormPassword.hasError('required')">
+                  Last Name is required!
+                </span>
+
+                <span *ngIf="userFormPassword.hasError('minlength')">
+                  Last Name should be at least 5 charachters!
+                </span>
+
+              </span>
+
+            </div>
+
+            <div class="form-group col-12">
+              <label for="confirmpassword">Confirm Password</label>
+              <input type="password" class="form-control" name="user.confirmpassword"
+                     required #userFormConfrimPassword="ngModel" minlength="5" [(ngModel)]="user.confirmpassword" />
+
+              <span class="error-block" *ngIf="!userFormConfrimPassword.valid && userFormConfrimPassword.touched">
+
+                <span *ngIf="userFormConfrimPassword.hasError('required')">
+                  Last Name is required!
+                </span>
+
+                <span *ngIf="userFormConfrimPassword.hasError('minlength')">
+                  Last Name should be at least 5 charachters!
+                </span>
+
+              </span>
+
+            </div>
+
+            <div class="form-group col-12">
+              <button type="submit" class="btn btn-success m-2" [disabled]="!userForm.valid">Save</button>
+              <button type="reset" class="btn btn-danger m-2">Reset</button>
+            </div>
+
+          </form>
+
+        </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,37 @@
+<section id="faq" class="faq section-bg">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title" *ngIf="sections">
+      <h2 *ngIf="courseId">الشعب</h2>
+      <h2 *ngIf="!course">جميع الشعب</h2>
+
+      <h4 *ngIf="course">{{course.name}}</h4>
+    </div>
+
+    <div class="faq-list">
+      <ul *ngIf="sections">
+
+
+        <li data-aos="fade-up" [attr.data-aos-delay]="100*(i+1)" *ngFor="let section of sections; let i = index">
+          <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" [attr.data-bs-target]="'#faq-list-'+(i+1)" class="collapsed text-center">
+            <span> {{section.name}}</span>    <i class="fa fa-book mx-2"></i>
+            <i class="bx bx-chevron-down icon-show"></i>
+            <i class="bx bx-chevron-up icon-close"></i>
+          </a>
+          <div [attr.id]="'faq-list-'+(i+1)" class="collapse" data-bs-parent=".faq-list">
+            <app-section-managment [sectionId]="section.id" *ngIf="section"></app-section-managment>
+
+          </div>
+        </li>
+        <li class="text-center">
+          <button class="btn btn-primary m-2 text-white btn-block-style" routerLink="/services">  العودة الى الاقسام الرئيسية </button>
+          <button class="btn btn-primary m-2 text-white btn-block-style" routerLink="/courses">  العودة للدورات </button>
+          <button class="btn btn-primary m-2 text-white btn-block-style" routerLink="/section/add">  اضافة شعبة</button>
+        </li>
+    
+
+      </ul>
+    </div>
+
+  </div>
+</section>

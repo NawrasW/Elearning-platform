@@ -1,0 +1,354 @@
+<section id="services" class="contact">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2> تسجيل </h2>
+     
+    </div>
+    <div class="row">
+      <div class="col-lg-12 mt-5 mt-lg-0 d-flex align-items-stretch text-end ">
+        <form (ngSubmit)="onSubmit(userForm)" #userForm="ngForm" class="php-email-form" dir="rtl">
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="firstName">الاسم الأول</label>
+              <input type="text" class="form-control" name="user.firstName"
+                     required [disabled]="pageMode != PageModeEnum.Add || pageMode == PageModeEnum.View"
+                     #userFormFirstName="ngModel" minlength="3" [(ngModel)]="user.firstName" />
+              <span class="error-block" *ngIf="!userFormFirstName.valid && userFormFirstName.touched">
+                <span *ngIf="userFormFirstName.hasError('required')">الاسم الأول مطلوب!</span>
+                <span *ngIf="userFormFirstName.hasError('minlength')">الاسم الأول يجب أن يحتوي على 3 أحرف على الأقل!</span>
+              </span>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="lastName">الاسم الأخير</label>
+              <input type="text" class="form-control" name="user.lastName"
+                     required [disabled]="pageMode != PageModeEnum.Add || pageMode == PageModeEnum.View"
+                     #userFormLastName="ngModel" minlength="5" [(ngModel)]="user.lastName" />
+              <span class="error-block" *ngIf="!userFormLastName.valid && userFormLastName.touched">
+                <span *ngIf="userFormLastName.hasError('required')">الاسم الأخير مطلوب!</span>
+                <span *ngIf="userFormLastName.hasError('minlength')">الاسم الأخير يجب أن يحتوي على 5 أحرف على الأقل!</span>
+              </span>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="email">البريد الإلكتروني</label>
+              <input type="email" class="form-control" name="user.email"
+                     required [disabled]="pageMode != PageModeEnum.Add || pageMode == PageModeEnum.View"
+                     #userFormEmail="ngModel" email [(ngModel)]="user.email" />
+              <span class="error-block" *ngIf="!userFormEmail.valid && userFormEmail.touched">
+                <span *ngIf="userFormEmail.hasError('required')">البريد الإلكتروني مطلوب!</span>
+                <span *ngIf="userFormEmail.hasError('email')">البريد الإلكتروني غير صالح!</span>
+              </span>
+            </div>
+
+
+            <div class="form-group col-md-6">
+              <label for="dateOfBirth">تاريخ الميلاد</label>
+              <input type="date" class="form-control" name="user.dateOfBirth"
+                     required [disabled]="pageMode != PageModeEnum.Add"
+                     #userFormDateOfBirth="ngModel" [(ngModel)]="user.dateOfBirth" />
+              <span class="error-block" *ngIf="!userFormDateOfBirth.valid && userFormDateOfBirth.touched">
+                <span *ngIf="userFormDateOfBirth.hasError('required')">تاريخ الميلاد مطلوب!</span>
+              </span>
+            </div>
+
+
+
+
+
+            <div class="form-group col-md-6">
+              <label for="nationalNumber">الرقم الوطني</label>
+              <input type="text" class="form-control" name="user.nationalNumber"
+                     required [disabled]="pageMode == PageModeEnum.View"
+                     #userFormNationalNumber="ngModel" [(ngModel)]="user.nationalNumber" />
+              <span class="error-block" *ngIf="!userFormNationalNumber.valid && userFormNationalNumber.touched">
+                <span *ngIf="userFormNationalNumber.hasError('required')">الرقم الوطني مطلوب!</span>
+              </span>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="phoneNumber">رقم الهاتف</label>
+              <input type="text" class="form-control" name="user.phoneNumber"
+                     required [disabled]="pageMode == PageModeEnum.View"
+                     #userFormPhoneNumber="ngModel" [(ngModel)]="user.phoneNumber" />
+              <span class="error-block" *ngIf="!userFormPhoneNumber.valid && userFormPhoneNumber.touched">
+                <span *ngIf="userFormPhoneNumber.hasError('required')">رقم الهاتف مطلوب!</span>
+              </span>
+            </div>
+
+
+
+
+            <div class="form-group col-md-6">
+              <label for="username">اسم المستخدم</label>
+              <input type="text" class="form-control" name="user.username"
+                     required [disabled]="pageMode == PageModeEnum.View"
+                     #userFormUsername="ngModel" [(ngModel)]="user.username" />
+              <span class="error-block" *ngIf="!userFormUsername.valid && userFormUsername.touched">
+                <span *ngIf="userFormUsername.hasError('required')">اسم المستخدم مطلوب!</span>
+              </span>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="gender">الجنس</label>
+              <select class="form-control" name="user.gender"
+                      required [disabled]="pageMode != PageModeEnum.Add || pageMode == PageModeEnum.View"
+                      #userFormGender="ngModel" [(ngModel)]="user.gender">
+                <option value="" disabled selected>اختر الجنس</option>
+                <option value="Male">ذكر</option>
+                <option value="Female">أنثى</option>
+              </select>
+              <span class="error-block" *ngIf="!userFormGender.valid && userFormGender.touched">
+                <span *ngIf="userFormGender.hasError('required')">الجنس مطلوب!</span>
+              </span>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="password">كلمة المرور</label>
+              <input type="password" class="form-control" name="user.password"
+                     required [disabled]="pageMode == PageModeEnum.View"
+                     #userFormPassword="ngModel" minlength="5" [(ngModel)]="user.password" />
+              <span class="error-block" *ngIf="!userFormPassword.valid && userFormPassword.touched">
+                <span *ngIf="userFormPassword.hasError('required')">كلمة المرور مطلوبة!</span>
+                <span *ngIf="userFormPassword.hasError('minlength')">كلمة المرور يجب أن تحتوي على 5 أحرف على الأقل!</span>
+              </span>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="confirmpassword">تأكيد كلمة المرور</label>
+              <input type="password" class="form-control" name="user.confirmpassword"
+                     required [disabled]="pageMode == PageModeEnum.View"
+                     #userFormConfirmPassword="ngModel" minlength="5" [(ngModel)]="user.confirmpassword" />
+              <span class="error-block" *ngIf="!userFormConfirmPassword.valid && userFormConfirmPassword.touched">
+                <span *ngIf="userFormConfirmPassword.hasError('required')">تأكيد كلمة المرور مطلوب!</span>
+                <span *ngIf="userFormConfirmPassword.hasError('minlength')">تأكيد كلمة المرور يجب أن تحتوي على 5 أحرف على الأقل!</span>
+              </span>
+            </div>
+
+
+            <div class="form-group col-12">
+              <button type="submit" class="btn btn-success m-2" [disabled]="!userForm.valid">حفظ</button>
+              <button type="reset" class="btn btn-danger m-2" (click)="reset()">إعادة تعيين</button>
+              <button type="button" class="btn btn-danger m-2" routerLink="/user/list-user">إلغاء</button>
+              <button type="button" class="btn btn-danger m-2" routerLink="/user/list-user">إغلاق</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--<section id="services" class="services section-bg">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>تسجيل </h2>
+
+    </div>
+    <div class="row  ">
+      <div class="col-lg-12 h " [class.col-6]="!isPopup" [class.col-12]="isPopup">
+        <div class="card m-auto">
+
+          <div class="card-header">
+            Registration
+          </div>
+
+          <div class="card-body">
+            <form (ngSubmit)="onSubmit(userForm)" #userForm="ngForm">
+
+              <div class="form-group col-12">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" name="user.firstName"
+                       required [disabled]="pageMode != PageModeEnum.Add || pageMode == PageModeEnum.View "
+                       #userFormFirstName="ngModel" minlength="5" [(ngModel)]="user.firstName" />
+
+                <span class="error-block" *ngIf="!userFormFirstName.valid && userFormFirstName.touched">
+
+                  <span *ngIf="userFormFirstName.hasError('required')">
+                    First Name is required!
+                  </span>
+
+                  <span *ngIf="userFormFirstName.hasError('minlength')">
+                    First Name should be at least 5 charachters!
+                  </span>
+
+                </span>
+
+              </div>
+
+              <div class="form-group col-12">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" name="user.lastName"
+                       required [disabled]="pageMode != PageModeEnum.Add || pageMode == PageModeEnum.View"
+                       #userFormLastName="ngModel" minlength="5" [(ngModel)]="user.lastName" />
+
+                <span class="error-block" *ngIf="!userFormLastName.valid && userFormLastName.touched">
+
+                  <span *ngIf="userFormLastName.hasError('required')">
+                    Last Name is required!
+                  </span>
+
+                  <span *ngIf="userFormLastName.hasError('minlength')">
+                    Last Name should be at least 5 charachters!
+                  </span>
+
+                </span>
+
+              </div>
+
+
+              <div class="form-group col-12">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="user.email"
+                       required [disabled]="pageMode != PageModeEnum.Add || pageMode == PageModeEnum.View "
+                       #userFormEmail="ngModel" email [(ngModel)]="user.email" />
+
+                <span class="error-block" *ngIf="!userFormEmail.valid && userFormEmail.touched">
+
+                  <span *ngIf="userFormEmail.hasError('required')">
+                    Email is required!
+                  </span>
+
+                  <span *ngIf="userFormEmail.hasError('email')">
+                    Email is invaild!
+                  </span>
+
+                </span>
+
+              </div>
+
+              <div class="form-group col-12">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="user.password"
+                       required [disabled]=" pageMode == PageModeEnum.View"
+                       #userFormPassword="ngModel" minlength="5" [(ngModel)]="user.password" />
+
+                <span class="error-block" *ngIf="!userFormPassword.valid && userFormPassword.touched">
+
+                  <span *ngIf="userFormPassword.hasError('required')">
+                    Last Name is required!
+                  </span>
+
+                  <span *ngIf="userFormPassword.hasError('minlength')">
+                    Last Name should be at least 5 charachters!
+                  </span>
+
+                </span>
+
+              </div>
+
+              <div class="form-group col-12">
+                <label for="confirmpassword">Confirm Password</label>
+                <input type="password" class="form-control" name="user.confirmpassword"
+                       required [disabled]=" pageMode == PageModeEnum.View"
+                       #userFormConfrimPassword="ngModel" minlength="5" [(ngModel)]="user.confirmpassword" />
+
+                <span class="error-block" *ngIf="!userFormConfrimPassword.valid && userFormConfrimPassword.touched">
+
+                  <span *ngIf="userFormConfrimPassword.hasError('required')">
+                    Last Name is required!
+                  </span>
+
+                  <span *ngIf="userFormConfrimPassword.hasError('minlength')">
+                    Last Name should be at least 5 charachters!
+                  </span>
+
+                </span>
+
+              </div>
+
+              <div class="form-group col-12">
+                <label for="nationalNumber">National Number</label>
+                <input type="text" class="form-control" name="user.nationalNumber"
+                       required [disabled]=" pageMode == PageModeEnum.View"
+                       #userFormNationalNumber="ngModel" [(ngModel)]="user.nationalNumber" />-->
+<!-- Error messages for national number validation -->
+<!--<span class="error-block" *ngIf="!userFormNationalNumber.valid && userFormNationalNumber.touched">
+    <span *ngIf="userFormNationalNumber.hasError('required')">National Number is required!</span>
+  </span>
+</div>
+
+<div class="form-group col-12">
+  <label for="phoneNumber">Phone Number</label>
+  <input type="text" class="form-control" name="user.phoneNumber"
+         required [disabled]=" pageMode == PageModeEnum.View"
+         #userFormPhoneNumber="ngModel" [(ngModel)]="user.phoneNumber" />-->
+<!-- Error messages for phone number validation -->
+<!--<span class="error-block" *ngIf="!userFormPhoneNumber.valid && userFormPhoneNumber.touched">
+    <span *ngIf="userFormPhoneNumber.hasError('required')">Phone Number is required!</span>
+  </span>
+</div>
+
+
+
+<div class="form-group col-12" *ngIf="pageMode == PageModeEnum.Add">
+  <label for="dateOfBirth">Date of Birth</label>
+  <input type="date" class="form-control" name="user.dateOfBirth"
+         required #userFormDateOfBirth="ngModel" [(ngModel)]="user.dateOfBirth" />-->
+<!-- Error messages for date of birth validation -->
+<!--<span class="error-block" *ngIf="!userFormDateOfBirth.valid && userFormDateOfBirth.touched">
+                <span *ngIf="userFormDateOfBirth.hasError('required')">Date of Birth is required!</span>
+              </span>
+            </div>
+
+
+
+            <div class="form-group col-12" *ngIf="pageMode != PageModeEnum.Add && user ">
+              <label for="dateOfBirth">Date of Birth</label>
+              <input type="text" class="form-control" name="user.dateOfBirth" [disabled]="pageMode != PageModeEnum.Add ||
+pageMode == PageModeEnum.View"
+                     value="{{user.dateOfBirth | date : 'dd/MM/yyyy'}}" />
+
+
+            </div>
+
+
+
+
+
+
+            <div class="form-group col-12">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" name="user.username"
+                     required [disabled]="
+             pageMode == PageModeEnum.View"
+                     #userFormUsername="ngModel" [(ngModel)]="user.username" />-->
+<!-- Error messages for username validation -->
+<!--<span class="error-block" *ngIf="!userFormUsername.valid && userFormUsername.touched">
+    <span *ngIf="userFormUsername.hasError('required')">Username is required!</span>
+  </span>
+</div>
+
+<div class="form-group col-12">
+  <label for="gender">Gender</label>
+  <select class="form-control" name="user.gender"
+          required [disabled]="pageMode != PageModeEnum.Add || pageMode == PageModeEnum.View"
+          #userFormGender="ngModel" [(ngModel)]="user.gender">
+    <option value="" disabled selected>Select Gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select>-->
+<!-- Error messages for gender validation -->
+<!--<span class="error-block" *ngIf="!userFormGender.valid && userFormGender.touched">
+                <span *ngIf="userFormGender.hasError('required')">Gender is required!</span>
+              </span>
+            </div>
+
+
+
+
+
+
+            <div class="form-group col-12" *ngIf="!isPopup">
+              <button type="submit" class="btn btn-success m-2" [disabled]="!userForm.valid">Save</button>
+              <button type="reset" class="btn btn-danger m-2" (click)="reset()">Reset</button>
+              <button type="button" class="btn btn-danger m-2" routerLink="/list-user">Cancel</button>
+              <button type="button" class="btn btn-danger m-2" routerLink="/list-user">Close</button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+</section>-->

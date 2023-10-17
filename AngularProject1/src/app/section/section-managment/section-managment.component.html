@@ -1,0 +1,159 @@
+<section id="team" class="team section-bg">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>الشعبة</h2>
+    </div>
+
+    <div class="row" *ngIf="section">
+
+
+      <div class="col-lg-6 my-2" data-aos="zoom-in" data-aos-delay="400">
+        <div class="member d-flex align-items-start">
+          <div class="pic">
+            <img src="assets/img/team/{{section.teacher.imgName}}" *ngIf="section.teacher.imgName" class="img-fluid" alt="">
+            <img src="assets/img/team/team1.png" *ngIf="!section.teacher.imgName" class="img-fluid" alt="">
+          </div>
+          <div class="member-info">
+            <h4>{{getFullName(section.teacher)}}</h4>
+            <span>{{section.teacher.experience}}</span>
+            <p>{{section.teacher.phoneNumber}}</p>
+            <p>{{section.teacher.email}}</p>
+            <div class="social">
+              <a *ngIf="section.teacher.twitter" target="_blank" href="{{section.teacher.twitter}}"><i class="ri-twitter-fill"></i></a>
+              <a *ngIf="section.teacher.facebook" target="_blank" href="{{section.teacher.facebook}}"><i class="ri-facebook-fill"></i></a>
+              <a *ngIf="section.teacher.instagram" target="_blank" href="{{section.teacher.instagram}}"><i class="ri-instagram-fill"></i></a>
+              <a> <i class="ri-linkedin-box-fill"></i> </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 my-2" data-aos="zoom-in" data-aos-delay="400">
+        <div class="member d-flex align-items-center">
+
+          <div class="member-info text-end">
+            <h4>معلومات القسم</h4>  <i class={{section.course.department.iconClass}}></i>
+
+            <form>
+              <div class="row text-end">
+                <div class="form-group col-md-6 ">
+                  <label for="name">Name</label>
+                  <input type="text" class="form-control" disabled
+                         name="section.course.department.name"
+                         id="section.course.department.name" required [(ngModel)]="section.course.department.name" />
+                </div>
+
+                <div class="form-group col-md-6 ">
+                  <label for="description">Description</label>
+                  <input type="text" class="form-control" disabled
+                         name="section.course.department.description"
+                         id="section.course.department.description" required [(ngModel)]="section.course.department.description" />
+                </div>
+              </div>
+
+
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="col-lg-6 my-2" data-aos="zoom-in" data-aos-delay="400">
+        <div class="member d-flex align-items-center">
+
+          <div class="member-info text-end">
+            <h4>معلومات الدورة</h4>  <i class="fa fa-book"></i>
+
+            <form>
+              <div class="row text-end">
+                <div class="form-group col-md-6 ">
+                  <label for="name">Name</label>
+                  <input type="text" class="form-control" disabled
+                         name="section.course.name"
+                         id="section.course.name" required [(ngModel)]="section.course.name" />
+                </div>
+
+                <div class="form-group col-md-6 ">
+                  <label for="description">Description</label>
+                  <input type="text" class="form-control" disabled
+                         name="section.course.description"
+                         id="section.course.description" required [(ngModel)]="section.course.description" />
+                </div>
+              </div>
+
+
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="col-lg-6 my-2" data-aos="zoom-in" data-aos-delay="400">
+        <div class="member d-flex align-items-center">
+
+          <div class="member-info text-end">
+            <h4>معلومات الشعبة</h4>  <i class="fa fa-class"></i>
+
+            <form>
+              <div class="row text-end">
+                <div class="form-group col-md-12 ">
+                  <label for="name">Name</label>
+                  <input type="text" class="form-control"
+                         name="section.name"
+                         id="section.name" required [disabled]="!canEdit" [(ngModel)]="section.name" />
+                </div>
+
+                <div class="form-group col-md-6 ">
+                  <label for="description">Total Hours</label>
+                  <input type="text" class="form-control"
+                         name="section.totalHours"
+                         id="section.totalHours" required [disabled]="!canEdit" [(ngModel)]="section.totalHours" />
+                </div>
+
+                <div class="form-group col-md-6 ">
+                  <label for="description">Lectures Per Week</label>
+                  <input type="text" class="form-control"
+                         name="section.lecturesPerWeek"
+                         id="section.lecturesPerWeek" required [disabled]="!canEdit" [(ngModel)]="section.lecturesPerWeek" />
+                </div>
+
+                <div class="form-group col-md-6 ">
+                  <label for="description">Time From</label>
+                  <input type="text" class="form-control"
+                         name="section.timeFrom"
+                         id="section.timeFrom" required [disabled]="!canEdit" [(ngModel)]="section.timeFrom" />
+                </div>
+
+
+                <div class="form-group col-md-6 ">
+                  <label for="description">Time To</label>
+                  <input type="text" class="form-control"
+                         name="section.timeto"
+                         id="section.timeto" required  [disabled]="!canEdit" [(ngModel)]="section.timeto" />
+                </div>
+
+              </div>
+
+
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+      <button *ngIf="!canEdit" (click)="allwEdit()" class="btn btn-block my-1 text-bg-primary btn-block-style">تعديل</button>
+      <button *ngIf="canEdit" (click)="save()" class="btn btn-block my-1 text-bg-primary btn-block-style">حفظ</button>
+    </div>
+
+  </div>
+</section>

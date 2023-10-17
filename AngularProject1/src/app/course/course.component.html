@@ -1,0 +1,207 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+
+        <div class="card-header">
+          <h3 class="card-title">Courses</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col d-flex flex-row-reverse">
+              <button type="button" class="btn btn-primary m-2" #openModalButton data-bs-toggle="modal" data-bs-target="#courseModal">Add Course</button>
+            </div>
+
+
+          </div>
+
+          <table class="table mx-auto">
+            <thead class="table-dark">
+              <tr class="row">
+                <th class="col">Name</th>
+                <th class="col">Description</th>
+                <th class="col">Creation Date</th>
+                <th class="col">Updated Date</th>
+              </tr>
+            </thead>
+
+
+            <tr class="row mt-4" *ngFor="let course of courses">
+              <td class="col">{{course.name}}</td>
+              <td class="col">{{course.description}}</td>
+              <td class="col">{{course.creationDate}}</td>
+              <td class="col">{{course.updateDate}}</td>
+             
+              <td class="col">
+
+                <div class="container mt-3">
+                  <div class="btn-group">
+        
+                    <button type="button" class="btn btn-primary mx-1" (click)="edit(course)">Edit </button>
+                    <button type="button" class="btn btn-success mx-1" (click)="view(course)">View</button>
+                    <button type="button" class="btn btn-danger mx-1" (click)="delete(course)">Delete</button>
+                  </div>
+                </div>
+
+              </td>
+
+            </tr>
+          </table>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+</div>
+
+
+
+
+<div class="modal fade" id="courseModal">
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Course</h4>
+        <button type="button" class="btn-close" (click)="reset()" #closeButton data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row mt-3">
+          <div class="col-12 m-auto" >
+            <div class="card m-auto">
+
+              <div class="card-header">
+                Registration
+              </div>
+
+              <div class="card-body">
+
+
+
+
+
+                <form  #courseForm="ngForm">
+
+                  <div class="form-group col-12">
+                    <label for="name"> Name</label>
+                    <input type="text" class="form-control" name="course.name"
+                           required [disabled]="pageMode == PageModeEnum.View"
+                           #courseFormName="ngModel" minlength="5" [(ngModel)]="course.name" />
+
+                    <span class="error-block" *ngIf="!courseFormName.valid && courseFormName.touched">
+
+                      <span *ngIf="courseFormName.hasError('required')">
+                        Name is required!
+                      </span>
+
+
+
+                    </span>
+
+                  </div>
+
+
+
+
+           
+
+                    <div class="form-group col-12">
+                      <label for="description"> Description</label>
+                      <input type="text" class="form-control" name="course.description"
+                             required [disabled]="pageMode == PageModeEnum.View"
+                             #courseFormDescription="ngModel" minlength="5" [(ngModel)]="course.description" />
+
+                      <span class="error-block" *ngIf="!courseFormDescription.valid && courseFormDescription.touched">
+
+                        <span *ngIf="courseFormDescription.hasError('required')">
+                          Description is required!
+                        </span>
+
+
+
+                      </span>
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="form-group col-12" *ngIf="pageMode == PageModeEnum.Add">
+                      <label for="creationDate">Date</label>
+                      <input type="date" class="form-control" name="course.creationDate"
+                             required #courseFormCreationDate="ngModel" [(ngModel)]="course.creationDate" />
+
+                      <!-- Error messages for date of birth validation -->
+                      <span class="error-block" *ngIf="!courseFormCreationDate.valid && courseFormCreationDate.touched">
+                        <span *ngIf="courseFormCreationDate.hasError('required')">Date is required!</span>
+                      </span>
+                    </div>
+
+
+
+                    <div class="form-group col-12" *ngIf="pageMode != PageModeEnum.Add && course ">
+                      <label for="creationDate">Date</label>
+                      <input type="text" class="form-control" name="course.creationDate" [disabled]="pageMode != PageModeEnum.Add ||
+           pageMode == PageModeEnum.View"
+                             value="{{course.creationDate | date : 'dd/MM/yyyy'}}" />
+
+
+                    </div>
+
+
+
+
+                  </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+              <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-bs-dismiss="modal" (click)="reset()"> Close</button>
+                <button *ngIf="pageMode != PageModeEnum.View" class="btn btn-danger" type="button" (click)="reset()"> Reset</button>
+                <button *ngIf="pageMode != PageModeEnum.View" class="btn btn-primary" type="button" (click)="save()"> Save</button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>

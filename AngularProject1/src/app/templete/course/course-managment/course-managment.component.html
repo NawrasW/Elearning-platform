@@ -1,0 +1,74 @@
+<section id="contact" class="contact">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>أضافة قسم جديد</h2>
+
+    </div>
+
+    <div class="row">
+
+
+
+      <div class="col-lg-12 mt-5 mt-lg-0 d-flex align-items-stretch text-end">
+        <form role="form" #courseForm="ngForm" class="php-email-form">
+          <div class="row">
+
+
+
+            <div class="form-group col-12">
+              <label for="department">الأقسام الرئيسية</label>
+              <select name="course.department" class="form-control" id="department" [(ngModel)]="course.departmentId" #department="ngModel"
+                      [disabled]="pageMode == PageModeEnum.View || pageMode == PageModeEnum.Update ">
+                <option *ngFor='let dep of departments' [value]="dep.id">
+                  {{dep.name}}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-12">
+              <label for="name">الاسم</label>
+              <input type="text" name="name" class="form-control" id="name" [(ngModel)]="course.name" #name="ngModel"
+                     [disabled]="pageMode == PageModeEnum.View " required>
+              <span class="error-block" *ngIf="!name.valid && name.touched">
+
+                <span *ngIf="name.hasError('required')">
+                  Name is required!
+                </span>
+              </span>
+            </div>
+
+
+            <div class="form-group col-md-12">
+
+              <label for="description">التفاصيل</label>
+              <input type="text" class="form-control" name="description" id="description" [(ngModel)]="course.description"
+                     #description="ngModel" [disabled]="pageMode == PageModeEnum.View " required>
+              <span class="error-block" *ngIf="!description.valid && description.touched">
+
+                <span *ngIf="description.hasError('required')">
+                  Description is required!
+                </span>
+              </span>
+            </div>
+
+
+
+
+
+          </div>
+
+          <div class="text-center ">
+           
+            <button routerLink="/services" class="mx-1" type="submit">العودة للدورات</button>
+            <button (click)="save()" class="mx-1" type="submit" *ngIf="pageMode != PageModeEnum.View ">حفظ</button>
+
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</section>

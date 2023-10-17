@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/alertifyjs/build/css/alertify.css";
+@import "../node_modules/alertifyjs/build/css/themes/bootstrap.min.css";
+@import "../node_modules/alertifyjs//build/css/themes/default.min.css";
+
+
+a {
+  text-decoration: none /*!important;*/
+}
+
+
+
+  a:hover {
+    /* Add styles for links when hovered over */
+    text-decoration: none;
+  }
+
+  a:visited {
+    /* Add styles for visited links */
+    text-decoration: none;
+  }

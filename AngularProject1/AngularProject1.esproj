@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.83-alpha">
+  <PropertyGroup>
+    <StartupCommand>npm start</StartupCommand>
+    <JavaScriptTestFramework>Jasmine</JavaScriptTestFramework>
+    <!-- Command to run on project build -->
+    <BuildCommand>
+    </BuildCommand>
+    <!-- Command to create an optimized build of the project that's ready for publishing -->
+    <ProductionBuildCommand>npm run build</ProductionBuildCommand>
+    <!-- Folder where production build objects will be placed -->
+    <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\AngularProject1</BuildOutputFolder>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\app\constans\" />
+    <Folder Include="src\app\guards\" />
+    <Folder Include="src\app\interceptors\" />
+    <Folder Include="src\app\user\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptConfiguration Remove="src\app\department-add\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="src\app\department-add\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="src\app\department-add\department-add.component.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="src\app\department-add\department-add.component.spec.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="src\app\department-add\department-add.component.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="src\app\department-add\department-add.component.css" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-6">
+    <h3>{{title}}</h3>
+    <p>form single binding</p>
+
+    <form>
+    <div class="row">
+      <div class="form-group col-12 m-1">
+        <label for="name">Name</label>
+        <input class="form-control" #name type="text"/>
+
+      </div>
+      <div class="form-group col-12 m-1">
+        <label for="mark">Mark</label>
+        <input class="form-control" #mark  />
+
+      </div>
+      <div class="form-group col-12 m-1">
+        <button (click)="getData(name.value, mark.value)" class="btn btn-primary m-1" type="submit">Save</button>
+      </div>
+    </div>
+    </form>
+
+    <p>form ngmodel binding</p>
+    <form>
+      <div class="row">
+        <div class="form-group col-12 m-1">
+          <label for="name">Name</label>
+          <input class="form-control" #name type="text" [(ngModel)]="parentObjForm.name" name="name" />
+
+        </div>
+        <div class="form-group col-12 m-1">
+          <label for="mark">Mark</label>
+          <input class="form-control" #mark type="text" [(ngModel)]="parentObjForm.mark" name="mark" />
+
+        </div>
+        <div class="form-group col-12 m-1">
+          <button (click)="getData(name.value, mark.value)" class="btn btn-primary m-1" type="submit">Save</button>
+        </div>
+      </div>
+    </form>
+    <div *ngIf="response">
+      {{response}}
+    </div>
+  </div>
+  <div class="col-6">
+    <app-child [childName]="parentName"
+
+               [childMark]="parentMark"
+
+               [childObject]="parentObj"
+
+               [childObjForm]="parentObjForm"
+
+               [childListArray]="parentListArray"
+
+               (updateEvent)="updateTitle($event)"></app-child>
+  </div>
+</div>

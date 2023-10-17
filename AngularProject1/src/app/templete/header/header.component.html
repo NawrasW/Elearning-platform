@@ -1,0 +1,82 @@
+<header id="header" class="fixed-top custom-header">
+  <div class="container d-flex align-items-center ">
+
+    <h1 class="logo me-auto"><a href="index.html">منصة الوفاء التعليمية</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+    <nav id="navbar" class="navbar ">
+      <ul>
+        <li><a class="nav-link scrollto active">الرئيسية</a></li>
+        <li><a class="nav-link scrollto" onclick="window.scrollTo(0, 500)" routerLink="/about">حول منصة الوفاء</a></li>
+        <li><a class="nav-link scrollto" onclick="window.scrollTo(0, 500)" routerLink="/services">الاقسام الرئيسية</a></li>
+        <li><a class="nav-link   scrollto" onclick="window.scrollTo(0, 500)" routerLink="/courses">الدورات</a></li>
+        <li><a class="nav-link scrollto" onclick="window.scrollTo(0, 500)" routerLink="/team">فريقنا</a></li>
+
+
+        <li><a class="nav-link scrollto" onclick="window.scrollTo(0, 500)" routerLink="/contact">اتصل بنا</a></li>
+        <li><a class="getstarted scrollto" onclick="window.scrollTo(0, 500)" routerLink="/about">أبدا</a></li>
+        <!--<li *ngIf="!loggedin()"><a class="nav-link scrollto" routerLink="/login">تسجيل الدخول</a></li>
+        <li *ngIf="!loggedin()"><a class="nav-link scrollto" routerLink="/user/user-add">تسجيل</a></li>-->
+        <!--<li *ngIf="loggedin()"><a class="nav-link scrollto">Welcome {{loggedinUser}}</a></li>-->
+
+
+
+        <li  class="dropdown " onclick="window.scrollTo(0, 500)">
+          <a href="#"><span *ngIf="loggedin()">Welcome {{loggedinUser}}</span> <span *ngIf="!loggedin()">الدخول</span> <i class="bi bi-chevron-down"></i></a>
+       
+          <ul>
+
+
+
+            <li *ngIf="!loggedin()">
+              <a class="nav-link scrollto" routerLink="/user/login">
+                تسجيل الدخول <i class="fa fa-sign-in iconImg" aria-hidden="true">
+                </i>
+              </a>
+            </li>
+
+            <li *ngIf="!loggedin()">
+              <a class="nav-link scrollto" routerLink="/user/user-add">
+                تسجيل  <i class="fa fa-user-plus iconImg" aria-hidden="true">
+                </i>
+              </a>
+            </li>
+
+
+            <li *ngIf="loggedin()">
+              <a class="nav-link scrollto" routerLink="/services">
+                دورات مسجلة
+                <i class="fa fa-book iconImg" aria-hidden="true">
+                </i>
+              </a>
+            </li>
+
+
+
+            <li *ngIf="loggedin()" ><a class="nav-link scrollto "  routerLink="/user/user-update/{{loggedinUserId}}" > معلوماتي
+ <i class="fa fa-id-card-o iconImg" aria-hidden="true">
+                </i>  </a> </li>
+
+
+            <li *ngIf="loggedin()" >
+              <a class="nav-link scrollto"  href="#" (click)="logout()">
+                تسجيل الخروج
+                <i class="fa fa-sign-out iconImg" aria-hidden="true">
+                </i>
+              </a>
+            </li>
+
+            
+          </ul>
+          </li>
+
+
+
+
+    </ul>
+    <i class="bi bi-list mobile-nav-toggle"></i>
+  </nav><!-- .navbar -->
+
+</div>
+</header>

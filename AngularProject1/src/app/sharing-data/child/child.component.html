@@ -1,0 +1,58 @@
+<h3>Child</h3>
+<p *ngIf="childName && childMark ">Name is {{childName}} and Mark is {{childMark}}</p>
+
+<p>Name is {{childObject.name}} and Mark is {{childObject.mark}}</p>
+
+<p>Name is {{childObjForm.name}} and Mark is {{childObjForm.mark}}</p>
+
+<div *ngIf="childList && childList.length">
+  <table class="table table-border">
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Mark
+        </th>
+
+      </tr>
+
+    </thead>
+    <tr *ngFor="let obj of childListArray">
+      <td>{{obj.name}}</td>
+      <td>{{obj.mark}}</td>
+
+    </tr>
+
+  </table>
+</div>
+
+
+
+<div>
+  <table class="table table-border">
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Mark
+        </th>
+
+      </tr>
+
+    </thead>
+    <tr *ngFor="let obj of childListArray">
+      <td>{{obj.name}}</td>
+      <td>{{obj.mark}}</td>
+
+    </tr>
+
+  </table>
+</div>
+
+<input class="form-control" #title type="text" />
+<br />
+<a class="btn btn-primary" (click)="updateEvent.emit(title.value)">Change title</a>
