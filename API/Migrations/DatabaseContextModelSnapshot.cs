@@ -51,7 +51,7 @@ namespace API.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
                 });
 
             modelBuilder.Entity("API.Models.Domain.Department", b =>
@@ -75,7 +75,7 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("API.Models.Domain.Section", b =>
@@ -114,7 +114,7 @@ namespace API.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Sections");
+                    b.ToTable("Sections", (string)null);
                 });
 
             modelBuilder.Entity("API.Models.Domain.User", b =>
@@ -183,7 +183,7 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("API.Models.Domain.UserDepartment", b =>
@@ -206,7 +206,7 @@ namespace API.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserDepartments");
+                    b.ToTable("UserDepartments", (string)null);
                 });
 
             modelBuilder.Entity("API.Models.Domain.Course", b =>
