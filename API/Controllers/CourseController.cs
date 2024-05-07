@@ -20,7 +20,7 @@ namespace API.Controllers
         {
             _repsitory = repsitory;
         }
-
+        [AllowAnonymous]
         [HttpGet("getCourseById/{id}")]
 
         public async Task<IActionResult> GetCourseById(int id)
@@ -97,7 +97,7 @@ namespace API.Controllers
         }
 
 
-
+        [AllowAnonymous]
         [HttpGet("getCoursesByDepartmentId/{departmentId}")]
         public async Task<IActionResult> GetCoursesByDepartmentId(int departmentId)
 

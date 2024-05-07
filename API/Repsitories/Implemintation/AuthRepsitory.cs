@@ -20,58 +20,38 @@ namespace API.Repsitories.Implemintation
             _mapper = mapper;
         }
 
-        public async Task< UserLoginDto> Login(UserForLoginDto userDto)
+        public async Task<UserLoginDto> Login(UserForLoginDto userDto)
         {
-            // var record = await _db.Users.FirstOrDefaultAsync(us => us.Username.ToLower() == userDto.UserName && us.Password == userDto.Password);
+            try
+            {
+                var user = await _db.Users.FirstOrDefaultAsync(user =>
+                    user.Username.ToLower() == userDto.UserName.ToLower());
 
-            UserLoginDto record;
-            try {
-
-                var user = await _db.Users.Where(user => user.Username.ToLower() == userDto.UserName.ToLower()).FirstOrDefaultAsync();
-
-                /*&& user.Password == userDto.Password)*/
-                //.Select(user => new UserLoginDto
-                //{
-                //    Id = user.Id,
-                //    UserName = user.Username,
-                //    FirstName = user.FirstName,
-                //    LastName = user.LastName,
-                //    Role = user.Role
-
-                //}).FirstOrDefaultAsync()?? new UserLoginDto();
-
-                if(user == null || user.PasswordKey == null)
+                if (user == null || user.Password == null || user.PasswordKey == null)
                     return null;
+
                 if (!MatchPasswordHash(userDto.Password, user.Password, user.PasswordKey))
                     return null;
-                UserLoginDto result = new UserLoginDto
+
+                var result = new UserLoginDto
                 {
                     Id = user.Id,
                     UserName = user.Username,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Role = user.Role
-
                 };
+
                 return result;
             }
-
             catch (Exception ex)
             {
-
-                throw null;
+                // Log the exception or handle it appropriately
+                throw;
             }
-
-            //if (record == null)
-            //    return null;
-            //{ UserLoginDto result = new UserLoginDto(record.Username, record.FirstName, record.LastName); }
-
-            //UserLoginDto result = new UserLoginDto(record.Id, record.UserName, record.FirstName, record.LastName);
-            //if (record.Id == 0)
-
-            //    return null;
-
         }
+
+
 
         public async Task<bool> Register(UserDto userDto)
         {
@@ -112,20 +92,18 @@ namespace API.Repsitories.Implemintation
         }
 
 
-        private bool MatchPasswordHash(string passwordText, byte[] password, byte[] passwordkey) {
-        
-        using(var hmac = new HMACSHA512(passwordkey)) 
+        private bool MatchPasswordHash(string passwordText, byte[] storedHash, byte[] passwordKey)
+        {
+            using (var hmac = new HMACSHA512(passwordKey))
             {
-             var passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(passwordText));
-                for(int i =0; i < passwordHash.Length; i++)
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(passwordText));
+                for (int i = 0; i < computedHash.Length; i++)
                 {
-                    if (passwordHash[i] != passwordHash[i])
+                    if (computedHash[i] != storedHash[i])
                         return false;
                 }
-            return true;
-            
-            
             }
+            return true;
         }
     }
 }

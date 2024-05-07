@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using API.ConstantEnum;
 using Constants = API.Constans.Constants;
+using System.Security.Cryptography;
+using System.Text;
+using System.Reflection;
 
 namespace API.Repsitories.Implemintation
 {
@@ -21,44 +24,88 @@ namespace API.Repsitories.Implemintation
             _db = db;
             _mapper = mapper;
         }
-        public async Task< bool> AddUpdateUser(UserDto userdto)
+        public async Task<bool> AddUpdateUser(UserDto userDto)
         {
             try
             {
-                //User userObj = new User(userdto.Id, userdto.FirstName, userdto.LastName, userdto.Email, userdto.Password,
-                //    userdto.NationalNumber, userdto.PhoneNumber, userdto.DateOfBirth, userdto.Username, userdto.Gender);
-                //User user = new User
-                //{
-                //    Id = userdto.Id,
-                //    NationalNumber = userdto.NationalNumber,
-                //    FirstName = userdto.FirstName,
-                //    LastName = userdto.LastName,
-                //    Email = userdto.Email,
-                //    PhoneNumber = userdto.PhoneNumber,
-                //    DateOfBirth = userdto.DateOfBirth,
-                //    Gender = userdto.Gender,
-                //    Username = userdto.Username,
-                //    Password = userdto.Password,
-                //};
+                Console.WriteLine("Entering AddUpdateUser method...");
 
+                User user;
 
+                if (userDto.Id == 0)
+                {
+                    Console.WriteLine("Adding a new user...");
 
-                User user = _mapper.Map<User>(userdto);
+                    // Create a new user entity and manually set properties
+                    user = new User
+                    {
+                        FirstName = userDto.FirstName,
+                        LastName = userDto.LastName,
+                        Email = userDto.Email,
+                        PhoneNumber = userDto.PhoneNumber,
+                        DateOfBirth = userDto.DateOfBirth,
+                        Gender = userDto.Gender,
+                        NationalNumber = userDto.NationalNumber,
+                        Username = userDto.Username
+                    };
 
-                if (user.Id == 0) {
-                    
-                  await  _db.Users.AddAsync(user);
-                     }
+                    // Hash the password before saving it
+                    if (!string.IsNullOrEmpty(userDto.Password))
+                    {
+                        HashPassword(userDto.Password, out byte[] passwordKey, out byte[] passwordHash);
+                        user.PasswordKey = passwordKey;
+                        user.Password = passwordHash;
+                    }
+
+                    await _db.Users.AddAsync(user);
+                }
                 else
                 {
-                    
-                    _db.Users.Update(user);
+                    Console.WriteLine($"Updating user with ID: {userDto.Id}...");
+
+                    // Retrieve the existing user
+                    user = await _db.Users.FindAsync(userDto.Id);
+
+                    if (user != null)
+                    {
+                        // Manually update properties
+                        user.FirstName = userDto.FirstName;
+                        user.LastName = userDto.LastName;
+                        user.Email = userDto.Email;
+                        user.PhoneNumber = userDto.PhoneNumber;
+                        user.DateOfBirth = userDto.DateOfBirth;
+                        user.Gender = userDto.Gender;
+                        user.NationalNumber = userDto.NationalNumber;
+                        user.Username = userDto.Username;
+
+                        // Check if a new password is provided
+                        if (!string.IsNullOrEmpty(userDto.Password))
+                        {
+                            Console.WriteLine($"Updating user password for user with ID: {user.Id}...");
+
+                            // Hash the new password before updating it
+                            HashPassword(userDto.Password, out byte[] newPasswordKey, out byte[] newPasswordHash);
+                            user.PasswordKey = newPasswordKey;
+                            user.Password = newPasswordHash;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"User with ID {userDto.Id} not found.");
+                        return false;
+                    }
                 }
-                _db.SaveChanges();
+
+                Console.WriteLine("Saving changes to the database...");
+                await _db.SaveChangesAsync();
+
+                Console.WriteLine("Changes saved successfully.");
+
                 return true;
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"Error in AddUpdateUser: {ex.Message}");
                 return false;
             }
         }
@@ -84,7 +131,14 @@ namespace API.Repsitories.Implemintation
 
             }
         }
-
+        private void HashPassword(string password, out byte[] passwordKey, out byte[] passwordHash)
+        {
+            using (var hmac = new HMACSHA512())
+            {
+                passwordKey = hmac.Key;
+                passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+            }
+        }
         public async Task< List<UserDto>> GetAllUser()
         {
             var result = await _db.Users.ToListAsync();
@@ -149,3 +203,16 @@ namespace API.Repsitories.Implemintation
             }
     }
 }
+//User user = new User
+//{
+//    Id = userdto.Id,
+//    NationalNumber = userdto.NationalNumber,
+//    FirstName = userdto.FirstName,
+//    LastName = userdto.LastName,
+//    Email = userdto.Email,
+//    PhoneNumber = userdto.PhoneNumber,
+//    DateOfBirth = userdto.DateOfBirth,
+//    Gender = userdto.Gender,
+//    Username = userdto.Username,
+//    Password = userdto.Password,
+//};
